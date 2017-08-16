@@ -8,7 +8,6 @@ set clipboard+=unnamed
 set hidden              " enable buffer
 set switchbuf+=useopen
 
-echo "before if"
 " file encoding settings (windows only)
 if has('win32') || has('win64')
     set fileencodings=iso-2022-jp-3,iso-2022-jp,euc-jisx0213,euc-jp,utf-8,ucs-bom,euc-jp,eucjp-ms,cp932,latin1   " encoding for reading
