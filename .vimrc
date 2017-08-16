@@ -120,7 +120,7 @@ nmap <Space>u [unite]
 
 "nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
 nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]t :<C-u>Unite buffer_tab<CR>
+"nnoremap <silent> [unite]t :<C-u>Unite buffer_tab<CR>
 nnoremap <silent> [unite]f :<C-u>Unite file<CR>
 nnoremap <silent> [unite]r :<C-u>Unite file_rec<CR>
 nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
