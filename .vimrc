@@ -124,6 +124,7 @@ nnoremap <silent> [unite]t :<C-u>Unite buffer_tab<CR>
 nnoremap <silent> [unite]f :<C-u>Unite file<CR>
 nnoremap <silent> [unite]r :<C-u>Unite file_rec<CR>
 nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]o :<C-u>Unite bookmarck<CR>
 nnoremap <silent> [unite]l :<C-u>Unite line<CR>
 
 "-- End unite -- 
