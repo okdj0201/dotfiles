@@ -118,7 +118,7 @@ let g:unite_source_file_mru_limit=50
 nnoremap [unite] <Nop>
 nmap <Space>u [unite]
 
-nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
+"nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
 nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]t :<C-u>Unite buffer_tab<CR>
 nnoremap <silent> [unite]f :<C-u>Unite file<CR>
