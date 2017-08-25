@@ -8,6 +8,8 @@ dotfiles such as .vimrc, .bash_profile etc.
     $ ./install.sh  
 
 ## windows
+This bat file link or copy only .vimrc to INS_DIR\_vimrc and do
+anything other.
     $ git clone git@github.com:joxyuki/dotfile.git
 Execute install.bat with administrator privillege.
 

@@ -1,8 +1,9 @@
-rem This bat file only copy .vimrc to INS_DIR\_vimrc.
+rem This bat file link or copy only .vimrc to INS_DIR\_vimrc and do
+rem anything other.
 
 rem @echo off
 
-rem set directories
+rem directories. change as yours.
 set INS_DIR=%HOMEPATH%
 set DOT_DIR=%HOMEPATH%\git\dotfiles
 

@@ -10,14 +10,13 @@ cd $SCR_DIR
 
 function usage() {
     cat << EOT
- Usage:
+Usage:
     $0 [OPTIONS]
 
 Options:
     -t  test mode. just output commands but do not make links
     -f  remove existing files. default is interctive.
     -h  show this message
-
 EOT
 
     exit 1
@@ -26,14 +25,10 @@ EOT
 while getopts tfih OPT
 do
     case $OPT in
-        t) TEST_MODE=true
-            ;;
-        f) LN_OPT+='f'
-            ;;
-        h) usage
-            ;;
-        \?) usage
-            ;;
+        t) TEST_MODE=true ;;
+        f) LN_OPT=${LN_OPT/i/}; LN_OPT+='f' ;;
+        h) usage ;;
+        \?) usage ;;
     esac
 done
 
@@ -45,7 +40,7 @@ for f in .??*; do
     [ "$f" = ".gitmodules" ] && continue
 
     if $TEST_MODE; then
-        echo "ln $LN_OPT $SCR_DIR/$f ~/$f"
+        echo "(test mode) ln $LN_OPT $SCR_DIR/$f ~/$f"
     else
         ln $LN_OPT $SCR_DIR/$f ~/
     fi
