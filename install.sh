@@ -38,6 +38,7 @@ for f in .??*; do
     [ "$f" = ".gitignore" ] && continue
     [ "$f" = ".gitconfig.local.template" ] && continue
     [ "$f" = ".gitmodules" ] && continue
+    [ ! -e /etc/centos-release ] && [ "$f" = ".bashrc" ] && continue
 
     if $TEST_MODE; then
         echo "(test mode) ln $LN_OPT $SCR_DIR/$f ~/$f"
