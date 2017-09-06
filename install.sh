@@ -15,14 +15,14 @@ Usage:
 
 Options:
     -t  test mode. just output commands but do not make links
-    -f  remove existing files. default is interctive.
+    -f  remove existing files (default is interctive)
     -h  show this message
 EOT
 
     exit 1
 }
 
-while getopts tfih OPT
+while getopts tfh OPT
 do
     case $OPT in
         t) TEST_MODE=true ;;
@@ -32,13 +32,14 @@ do
     esac
 done
 
-echo "Isntall dotfiles..."
+echo "Install dotfiles..."
 for f in .??*; do
     [ "$f" = ".git" ] && continue
     [ "$f" = ".gitignore" ] && continue
     [ "$f" = ".gitconfig.local.template" ] && continue
     [ "$f" = ".gitmodules" ] && continue
-    [ ! -e /etc/centos-release ] && [ "$f" = ".bashrc" ] && continue
+    [ ! -e /etc/centos-release ] && [ "$f" = ".bashrc" ] && \
+        echo Skipping .bashrc, only CentOS are supported. && continue
 
     if $TEST_MODE; then
         echo "(test mode) ln $LN_OPT $SCR_DIR/$f ~/$f"
@@ -47,5 +48,5 @@ for f in .??*; do
     fi
 done
 
-echo "completed!"
+echo "Completed!"
 
