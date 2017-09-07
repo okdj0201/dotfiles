@@ -13,4 +13,9 @@ alias ll='ls -l'
 alias la='ls -la'
 alias ap='ansible-playbook'
 
+if type "nvim" > /dev/null 2>&1
+then
+    alias vim='nvim'
+fi
+
 
