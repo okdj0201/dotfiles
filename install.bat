@@ -1,5 +1,5 @@
 rem This bat file link or copy only .vimrc to INS_DIR\_vimrc and do
-rem anything other.
+rem NOT anything about other dotfiles.
 
 rem @echo off
 
