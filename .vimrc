@@ -1,7 +1,7 @@
 " editing and saveing settings
 set autowrite
 set nobackup
-if has('wind32') || has('win64')
+if has('win32') || has('win64')
     set undodir=$HOME/.vim/undo  " undo file directory (kaoriya only)
 endif
 set clipboard+=unnamed
@@ -68,44 +68,47 @@ if has('nvim')
     tnoremap <silent> <ESC> <C-\><C-n> " terminal emulator 
 endif
 
-"-- plugin settings --
-"
+"---------------------
+"-  plugin settings  -
+"---------------------
+
+if ! has('win32') && ! has('win64')
 "----------
 " dein.vim
 "----------
-if &compatible
-    set nocompatible               " Be iMproved
-endif
-
-" Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('~/.cache/dein')
-    call dein#begin('~/.cache/dein')
-
-    let s:toml_dir = '~/.config/nvim/dein/'
-    call dein#load_toml(s:toml_dir . 'dein.toml')
-    if has('nvim')
-        call dein#load_toml(s:toml_dir . 'dein_nvim.toml')
+    if &compatible
+        set nocompatible               " Be iMproved
     endif
 
     " Required:
-    call dein#end()
-    call dein#save_state()
-endif
+    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" Required:
-filetype plugin indent on
-syntax enable
-colorscheme molokai
+    " Required:
+    if dein#load_state('~/.cache/dein')
+        call dein#begin('~/.cache/dein')
 
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
+        let s:toml_dir = '~/.config/nvim/dein/'
+        call dein#load_toml(s:toml_dir . 'dein.toml')
+        if has('nvim')
+            call dein#load_toml(s:toml_dir . 'dein_nvim.toml')
+        endif
 
+        " Required:
+        call dein#end()
+        call dein#save_state()
+    endif
+
+    " Required:
+    filetype plugin indent on
+    syntax enable
+    colorscheme molokai
+
+    " If you want to install not installed plugins on startup.
+    if dein#check_install()
+        call dein#install()
+    endif
 "-- End dein -- 
+endif
 
 "-----------
 " unite.vim
