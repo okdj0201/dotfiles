@@ -12,6 +12,7 @@ fi
 alias ll='ls -l'
 alias la='ls -la'
 alias ap='ansible-playbook'
+alias os='openstack'
 
 if type "nvim" > /dev/null 2>&1
 then
