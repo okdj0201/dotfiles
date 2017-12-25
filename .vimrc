@@ -29,6 +29,13 @@ set foldmethod=indent
 set showmatch           " hilight "(" when ")" is input
 set scrolloff=5
 
+" file type indent settings
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.yaml setlocal ts=2 sw=2 sts=2
+    autocmd BufNewFile,BufRead *.yml setlocal ts=2 sw=2 sts=2
+augroup END
+
 " status line and related settings
 set laststatus=2        " always displays status line
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
