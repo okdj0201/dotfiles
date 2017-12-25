@@ -12,8 +12,10 @@ rem If you does not have the priviliege, copy the file as described
 rem below.
 if exist %HOMEPATH%\_vimrc (
     del %HOMEPATH%\_vimrc
+    del %HOMEPATH%\.vimrc
 )
 mklink %HOMEPATH%\_vimrc %DOT_DIR%\.vimrc
+mklink %HOMEPATH%\.vimrc %DOT_DIR%\.vimrc
 
 rem If you want to copy the file instead of symbliclink, enable
 rem following line.
