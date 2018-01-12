@@ -46,10 +46,10 @@ function get_os() {
 
 function get_script_dir() {
     if [ -L $0 ]; then
-        echo "Please run physical file(not link)."
+        echo "Please run physical file (not link)."
         exit 1
     fi
-    readonly SCR_DIR=$(dirname $0)
+    readonly SCR_DIR=$(cd $(dirname $0) && pwd)
 }
 
 OS=""
