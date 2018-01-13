@@ -80,6 +80,8 @@ for f in .??*; do
     [ "${f}" = ".gitmodules" ] && continue
     [ ! ${OS} = "centos" ] && [ "${f}" = ".bashrc" ] && \
         echo Skipping .bashrc, only CentOS are supported. && continue
+    [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
+        echo Skipping .tmux.conf, tmux is not installed. && continue
 
     if ${TEST_MODE}; then
         echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${f}"
