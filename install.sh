@@ -83,7 +83,7 @@ for f in .??*; do
     LN_NAME="${f}"
     if [ "${f}" = ".bashrc" ]; then
         case "${OS}" in
-            "ubuntu") LN_NAME=".bashrc.alias";;
+            "ubuntu") LN_NAME=".bashrc_alias";;
             "centos") ;;
             "mac") ;;
             *) echo Skipping .bashrc, your platform is not suppoted. &&\
