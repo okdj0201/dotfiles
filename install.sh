@@ -20,7 +20,7 @@ function get_os() {
     if [ "$(uname)" == "Darwin" ]; then
         OS="mac"
     elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-        if [ -e /etc/debian_version ] || [ -e /etc/debian_release ];
+        if [ -e /etc/debian_version ] || [ -e /etc/debian_release ]
         then
             if [ -e /etc/lsb-release ]; then
                 OS="ubuntu"
@@ -28,13 +28,13 @@ function get_os() {
                 OS="debian"
             fi
         elif [ -e /etc/redhat-release ]; then
-            if [ -e /etc/oracle-release ]; then
+            if [ -e /etc/centos-release ]; then
+                OS="centos"
+            elif [ -e /etc/oracle-release ]; then
                 OS="oracle"
             else
                 OS="redhat"
             fi
-        elif [ -e /etc/centos-release ]; then
-            OS="centos"
         else
             OS="linux"
         fi
@@ -57,7 +57,6 @@ TEST_MODE="false"
 LN_OPT="-snvi"
 
 get_os
-echo $OS
 get_script_dir
 
 cd ${SCR_DIR}
@@ -78,16 +77,25 @@ for f in .??*; do
     [ "${f}" = ".gitignore" ] && continue
     [ "${f}" = ".gitconfig.local.template" ] && continue
     [ "${f}" = ".gitmodules" ] && continue
-    [ ! ${OS} = "centos" ] && [ "${f}" = ".bashrc" ] && \
-        echo Skipping .bashrc, only CentOS are supported. && continue
     [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
         echo Skipping .tmux.conf, tmux is not installed. && continue
 
+    LN_NAME="${f}"
+    if [ "${f}" = ".bashrc" ]; then
+        case "${OS}" in
+            "ubuntu") LN_NAME=".bashrc.alias";;
+            "centos") ;;
+            "mac") ;;
+            *) echo Skipping .bashrc, your platform is not suppoted. &&\
+                continue;;
+        esac
+    fi
+
     if ${TEST_MODE}; then
-        echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${f}"
+        echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
     else
         set +e
-        ln ${LN_OPT} ${SCR_DIR}/${f} ~/${f}
+        ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}
         set -e
     fi
 done
