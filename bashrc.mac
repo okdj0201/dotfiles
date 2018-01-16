@@ -1,0 +1,14 @@
+# .bashrc for mac
+
+# User specific aliases and functions
+alias ll='ls -lG'
+alias la='ls -laG'
+alias ap='ansible-playbook'
+alias os='openstack'
+
+if type "nvim" > /dev/null 2>&1
+then
+    alias vim='nvim'
+fi
+
+
