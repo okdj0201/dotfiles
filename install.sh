@@ -71,6 +71,19 @@ do
     esac
 done
 
+echo "make link .bashrc -> platform specific file"
+set +e
+case "${OS}" in
+    "ubuntu")
+        ln -snvf bashrc.ubuntu .bashrc ;;
+    "centos")
+        ln -snvf bashrc.centos .bashrc ;;
+    "mac")
+        ln -snvf bashrc.mac .bashrc ;;
+    *) ;;
+esac
+set -e
+
 echo "Install dotfiles..."
 for f in .??*; do
     [ "${f}" = ".git" ] && continue
@@ -80,20 +93,16 @@ for f in .??*; do
     [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
         echo Skipping .tmux.conf, tmux is not installed. && continue
 
-    LN_NAME="${f}"
     if [ "${f}" = ".bashrc" ]; then
         case "${OS}" in
-            "ubuntu")
-                LN_NAME=".bash_aliases"
-                ln -snvf bashrc.ubuntu .bashrc ;;
-            "centos")
-                ln -snvf bashrc.centos .bashrc;;
-            "mac")
-                ln -snvf bashrc.mac .bashrc;;
+            "ubuntu") LN_NAME=".bash_aliases" ;;
+            "centos") ;;
+            "mac") ;;
             *) echo Skipping .bashrc, your platform is not suppoted. &&\
                 continue;;
         esac
     fi
+    LN_NAME="${f}"
 
     if ${TEST_MODE}; then
         echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
