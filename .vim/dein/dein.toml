@@ -19,3 +19,6 @@ repo = 'scrooloose/syntastic'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+

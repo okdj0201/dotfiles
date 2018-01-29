@@ -153,5 +153,18 @@ let g:syntastic_python_checkers = ['pycodestyle', 'pyflakes']
 "-----------
 let g:lightline = { 'colorscheme' : 'molokai' }
 
+"----------
+" fugitive
+"----------
+nnoremap [fugitive] <Nop>
+nmap <Space>g [fugitive]
+"nnoremap [fugitive]s :Gstatus<CR><C-w>T
+nnoremap [fugitive]s :Gstatus<CR>
+nnoremap [fugitive]a :Gwrite<CR>
+nnoremap [fugitive]c :Gcommit-v<CR>
+nnoremap [fugitive]d :Gdiff<CR>
+nnoremap [fugitive]b :Gblame<CR>
+nnoremap [fugitive]m :Gmerge<CR>
+
 " -- end of plugin settings --
 
