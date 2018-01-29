@@ -10,7 +10,7 @@ fi
 
 # User specific aliases and functions
 alias ll='ls -l'
-alias la='ls -la'
+alias la='ls -lA'
 alias ap='ansible-playbook'
 alias os='openstack'
 

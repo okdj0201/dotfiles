@@ -12,3 +12,10 @@ repo = 'nanotech/jellybeans.vim'
 
 [[plugins]]
 repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+

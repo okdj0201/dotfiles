@@ -79,10 +79,10 @@ endif
 "-  plugin settings  -
 "---------------------
 
-if ! has('win32') && ! has('win64')
 "----------
 " dein.vim
 "----------
+if ! has('win32') && ! has('win64')
     if &compatible
         set nocompatible               " Be iMproved
     endif
@@ -114,7 +114,6 @@ if ! has('win32') && ! has('win64')
     if dein#check_install()
         call dein#install()
     endif
-"-- End dein -- 
 endif
 
 "-----------
@@ -136,7 +135,23 @@ nnoremap <silent> [unite]o :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]l :<C-u>Unite line<CR>
 "nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
 
-"-- End unite -- 
+"-----------
+" syntastic
+"-----------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntatic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pycodestyle', 'pyflakes']
+
+"-----------
+" lightline
+"-----------
+let g:lightline = { 'colorscheme' : 'molokai' }
 
 " -- end of plugin settings --
 
