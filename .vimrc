@@ -151,7 +151,16 @@ let g:syntastic_python_checkers = ['pycodestyle', 'pyflakes']
 "-----------
 " lightline
 "-----------
-let g:lightline = { 'colorscheme' : 'molokai' }
+let g:lightline = {
+    \ 'colorscheme' : 'molokai',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ },
+    \ }
 
 "----------
 " fugitive
@@ -161,7 +170,7 @@ nmap <Space>g [fugitive]
 "nnoremap [fugitive]s :Gstatus<CR><C-w>T
 nnoremap [fugitive]s :Gstatus<CR>
 nnoremap [fugitive]a :Gwrite<CR>
-nnoremap [fugitive]c :Gcommit-v<CR>
+nnoremap [fugitive]c :Gcommit<CR>
 nnoremap [fugitive]d :Gdiff<CR>
 nnoremap [fugitive]b :Gblame<CR>
 nnoremap [fugitive]m :Gmerge<CR>
