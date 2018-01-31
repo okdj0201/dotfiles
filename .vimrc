@@ -61,8 +61,6 @@ nnoremap g*/ o*/<ESC>
 nnoremap g3 I#<ESC>
 nnoremap g5 I%<ESC>
 nnoremap g2 I"<ESC>
-nnoremap gcc :!gcc
-nnoremap g++ :!g++
 
 nnoremap Q <Nop>
 nnoremap q: <Nop>
@@ -71,7 +69,7 @@ nnoremap q? <Nop>
 
 " only for neovim
 if has('nvim')
-    tnoremap <silent> <ESC> <C-\><C-n> " terminal emulator 
+    tnoremap <silent> <ESC> <C-\><C-n>  " terminal emulator
 endif
 
 "---------------------
