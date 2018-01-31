@@ -26,7 +26,7 @@ set backspace=2
 "set whichwrap=4
 set foldmethod=indent
 
-set showmatch           " hilight "(" when ")" is input
+set showmatch           " hilight when "(" and ")" is input
 set scrolloff=5
 
 " file type indent settings
@@ -38,7 +38,6 @@ augroup END
 
 " status line and related settings
 set laststatus=2        " always displays status line
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 set number
 
 " search setting
