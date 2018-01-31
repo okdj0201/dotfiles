@@ -121,7 +121,9 @@ endif
 "-----------
 let g:unite_enable_start_insert=0
 let g:unite_source_histroy_yank_enable=1
-let g:unite_source_file_mru_limit=50 
+let g:unite_source_file_mru_limit=50
+
+call unite#custom#source('file', 'matchers', "matcher_default")
 
 nnoremap [unite] <Nop>
 nmap <Space>u [unite]
@@ -154,7 +156,7 @@ endif
 " lightline
 "-----------
 let g:lightline = {
-    \ 'colorscheme' : 'molokai',
+    \ 'colorscheme' : 'wombat',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
