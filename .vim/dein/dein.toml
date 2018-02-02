@@ -22,3 +22,6 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+[[plugins]]
+repo = 'kannokanno/previm'
+

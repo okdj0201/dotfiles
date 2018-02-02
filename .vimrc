@@ -32,8 +32,7 @@ set scrolloff=5
 " file type indent settings
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.yaml setlocal ts=2 sw=2 sts=2
-    autocmd BufNewFile,BufRead *.yml setlocal ts=2 sw=2 sts=2
+    autocmd BufNewFile,BufRead *.{yml,yaml} setlocal ts=2 sw=2 sts=2
 augroup END
 
 " status line and related settings
@@ -175,6 +174,15 @@ nnoremap [fugitive]c :Gcommit<CR>
 nnoremap [fugitive]d :Gdiff<CR>
 nnoremap [fugitive]b :Gblame<CR>
 nnoremap [fugitive]m :Gmerge<CR>
+
+"--------
+" previm
+"--------
+let g:previm_open_cmd='open /Applications/Google\ Chrome.app/'
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,markdown} set filetype=markdown
+augroup END
 
 " -- end of plugin settings --
 
