@@ -178,11 +178,13 @@ nnoremap [fugitive]m :Gmerge<CR>
 "--------
 " previm
 "--------
-let g:previm_open_cmd='open /Applications/Google\ Chrome.app/'
-augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,markdown} set filetype=markdown
-augroup END
+if has('mac')
+    let g:previm_open_cmd='open /Applications/Google\ Chrome.app/'
+    augroup PrevimSettings
+        autocmd!
+        autocmd BufNewFile,BufRead *.{md,markdown} set filetype=markdown
+    augroup END
+endif
 
 " -- end of plugin settings --
 
