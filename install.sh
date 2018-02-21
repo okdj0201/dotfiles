@@ -93,6 +93,7 @@ for f in .??*; do
     [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
         echo Skipping .tmux.conf, tmux is not installed. && continue
 
+    LN_NAME="${f}"
     if [ "${f}" = ".bashrc" ]; then
         case "${OS}" in
             "ubuntu") LN_NAME=".bash_aliases" ;;
@@ -102,7 +103,6 @@ for f in .??*; do
                 continue;;
         esac
     fi
-    LN_NAME="${f}"
 
     if ${TEST_MODE}; then
         echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
