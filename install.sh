@@ -92,6 +92,8 @@ for f in .??*; do
     [ "${f}" = ".gitmodules" ] && continue
     [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
         echo Skipping .tmux.conf, tmux is not installed. && continue
+    [ "${f}" = ".config" ] && ! type "nvim" > /dev/null 2>&1 &&\
+        echo Skipping .config, nvim is not installd. && continue
 
     LN_NAME="${f}"
     if [ "${f}" = ".bashrc" ]; then
