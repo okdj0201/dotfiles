@@ -146,6 +146,7 @@ if ! has('win32') && ! has('win64')
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
+    "let g:syntastic_python_checkers = ['pycodestyle', 'hacking']
 endif
 
 "-----------

@@ -2,7 +2,7 @@
 	email = jo.hiroyuki@lab.ntt.co.jp
 	name = Hiroyuki JO
 [core]
-	editor = vim
+	editor = nvim
 [merge]
 	ff = false
 [pull]
