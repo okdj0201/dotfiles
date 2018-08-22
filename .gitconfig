@@ -9,8 +9,8 @@
 	ff = only
 [alias]
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
-	checkout = co
-	status = st
+	co = checkout
+	st = status
 [gitreview]
 	username = joxyuki
 [url "https://"]
