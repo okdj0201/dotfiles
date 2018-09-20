@@ -4,7 +4,14 @@
 alias ll='ls -lG'
 alias la='ls -lAG'
 alias ap='ansible-playbook'
-alias os='openstack'
+
+if type "openstack" > /dev/null 2>&1
+then
+    alias os='openstack'
+    alias vnf='openstack vnf'
+    alias vnfd='openstack vnf descriptor'
+    alias os-env='echo "Project: ${OS_PROJECT_NAME}, User: ${OS_USERNAME}"'
+fi
 
 if type "nvim" > /dev/null 2>&1
 then
