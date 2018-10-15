@@ -143,9 +143,10 @@ if ! has('win32') && ! has('win64')
 
     let g:syntatic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_checkers = ['pycodestyle', 'flake8']
+    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_python_flake8_args = "--ignore E128,N320"
 endif
 
 "-----------
