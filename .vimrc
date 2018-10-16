@@ -29,6 +29,8 @@ set foldmethod=indent
 set showmatch           " hilight when "(" and ")" is input
 set scrolloff=5
 
+set splitright
+
 " file type indent settings
 augroup fileTypeIndent
     autocmd!
@@ -44,6 +46,13 @@ set ignorecase
 set smartcase
 set wrapscan
 set hlsearch
+
+" diff setting
+set diffopt=filler,vertical
+if !exists(":DiffOrg")
+    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+            \ | diffthis | wincmd p | diffthis
+endif
 
 " maps
 nnoremap <C-c><C-c> :<C-u>nohlsearch<CR><Esc>
