@@ -180,10 +180,11 @@ nmap <Space>g [fugitive]
 "nnoremap [fugitive]s :Gstatus<CR><C-w>T
 nnoremap [fugitive]s :Gstatus<CR>
 nnoremap [fugitive]a :Gwrite<CR>
+nnoremap [fugitive]w :Gwq<CR>
 nnoremap [fugitive]c :Gcommit<CR>
+nnoremap [fugitive]m :Gcommit --amend<CR>
 nnoremap [fugitive]d :Gdiff<CR>
 nnoremap [fugitive]b :Gblame<CR>
-nnoremap [fugitive]m :Gmerge<CR>
 
 "--------
 " previm
