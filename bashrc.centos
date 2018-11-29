@@ -14,6 +14,7 @@ alias la='ls -lA'
 alias tw='tmux rename-window "$(basename $(git rev-parse --show-toplevel 2>/dev/null || echo "${PWD/#$HOME/~}"))"'
 
 if type "ansible-playbook" > /dev/null 2>&1
+then
     alias ap='ansible-playbook'
 fi
 
