@@ -3,7 +3,11 @@
 # User specific aliases and functions
 alias ll='ls -l'
 alias la='ls -lA'
-alias ap='ansible-playbook'
+alias tw='tmux rename-window "$(basename $(git rev-parse --show-toplevel 2>/dev/null || echo "${PWD/#$HOME/~}"))"'
+
+if type "ansible-playbook" > /dev/null 2>&1
+    alias ap='ansible-playbook'
+fi
 
 if type "openstack" > /dev/null 2>&1
 then
@@ -11,11 +15,9 @@ then
     alias vnf='openstack vnf'
     alias vnfd='openstack vnf descriptor'
     alias os-env='echo "Project: ${OS_PROJECT_NAME}, User: ${OS_USERNAME}"'
-    alias tw='tmux rename-window "$(basename $(git rev-parse --show-toplevel 2>/dev/null || echo "${PWD/#$HOME/~}"))"'
 fi
+
 if type "nvim" > /dev/null 2>&1
 then
     alias vim='nvim'
 fi
-
-
