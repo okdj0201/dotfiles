@@ -78,6 +78,7 @@ nnoremap q? <Nop>
 " only for neovim
 if has('nvim')
     tnoremap <silent> <ESC> <C-\><C-n>  " terminal emulator
+    let g:python3_host_prog = system('echo -n `which python3`')
 endif
 
 "---------------------
@@ -141,6 +142,11 @@ nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]o :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]l :<C-u>Unite line<CR>
 "nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
+
+"----------
+" deoplete
+" ---------
+let g:deoplete#enable_at_startup = 1
 
 "-----------
 " syntastic
