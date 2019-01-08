@@ -161,7 +161,7 @@ if ! has('win32') && ! has('win64')
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
     let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = "--ignore E128,N320"
+    let g:syntastic_python_flake8_args = "--ignore E128,N320,I100,I201,D100,D101,D102,D103"
 endif
 
 "-----------
