@@ -24,7 +24,7 @@ set shiftwidth=4        " number of spaces when inputting <Tab> automatically
 set softtabstop=4       " number of speces when inputting or deleting <Tab>
 set backspace=2
 "set whichwrap=4
-set foldmethod=indent
+"set foldmethod=indent
 
 set showmatch           " hilight when "(" and ")" is input
 set scrolloff=5
@@ -46,6 +46,9 @@ set ignorecase
 set smartcase
 set wrapscan
 set hlsearch
+
+" vimgrep
+autocmd QuickFixCmdPost *grep* cwindow
 
 " diff setting
 set diffopt=filler,vertical
@@ -88,7 +91,7 @@ endif
 "----------
 " dein.vim
 "----------
-if ! has('win32') && ! has('win64')
+if has('nvim') || v:version >= 800
     if &compatible
         set nocompatible               " Be iMproved
     endif
@@ -146,7 +149,9 @@ nnoremap <silent> [unite]l :<C-u>Unite line<CR>
 "----------
 " deoplete
 " ---------
-let g:deoplete#enable_at_startup = 1
+if has('nvim') || v:version >= 800
+    let g:deoplete#enable_at_startup = 1
+endif
 
 "-----------
 " syntastic
@@ -183,14 +188,15 @@ let g:lightline = {
 "----------
 nnoremap [fugitive] <Nop>
 nmap <Space>g [fugitive]
-"nnoremap [fugitive]s :Gstatus<CR><C-w>T
-nnoremap [fugitive]s :Gstatus<CR>
+nnoremap [fugitive]s :Gstatus<CR><C-w>T:help :Gstatus<CR><C-w><C-w>
 nnoremap [fugitive]a :Gwrite<CR>
 nnoremap [fugitive]w :Gwq<CR>
 nnoremap [fugitive]c :Gcommit<CR>
 nnoremap [fugitive]m :Gcommit --amend<CR>
 nnoremap [fugitive]d :Gdiff<CR>
 nnoremap [fugitive]b :Gblame<CR>
+nnoremap [fugitive]r :Gread<CR>
+nnoremap [fugitive]g :Ggrep
 
 "--------
 " previm
