@@ -11,6 +11,9 @@
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 	co = checkout
 	st = status
+	d = diff
+	d1 = diff HEAD~
+	d2 = diff HEAD~2
 [gitreview]
 	username = joxyuki
 [url "https://"]
