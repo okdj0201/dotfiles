@@ -115,5 +115,20 @@ for f in .??*; do
     fi
 done
 
-echo "Completed!"
+if [ ! -e ~/.config ]; then
+    if ${TEST_MODE}; then
+        echo "(test mode) mkdir ~/.config"
+    else
+        echo "mkdir ~/.config"
+        mkdir ~/.config
+    fi
+fi
+if ${TEST_MODE}; then
+    echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
+else
+    set +e
+    ln ${LN_OPT} ${SCR_DIR}/.vim ~/.config/nvim
+    set -e
+fi
 
+echo "Completed!"
