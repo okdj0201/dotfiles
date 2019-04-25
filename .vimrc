@@ -188,7 +188,7 @@ let g:lightline = {
 "----------
 nnoremap [fugitive] <Nop>
 nmap <Space>g [fugitive]
-nnoremap [fugitive]s :Gstatus<CR><C-w>T:help :Gstatus<CR><C-w><C-w>
+nnoremap [fugitive]s :Gstatus<CR><C-w>T:help fugitive_c<CR><C-w><C-w>
 nnoremap [fugitive]a :Gwrite<CR>
 nnoremap [fugitive]w :Gwq<CR>
 nnoremap [fugitive]c :Gcommit<CR>
