@@ -91,7 +91,7 @@ endif
 "----------
 " dein.vim
 "----------
-if has('nvim') || v:version >= 800
+if ! has('win32') && ! has('win64') && (has('nvim') || v:version >= 800)
     if &compatible
         set nocompatible               " Be iMproved
     endif

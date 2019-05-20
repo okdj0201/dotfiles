@@ -52,6 +52,35 @@ function get_script_dir() {
     readonly SCR_DIR=$(cd $(dirname $0) && pwd)
 }
 
+# log output syntax presetting
+msg=""
+tred=$(tput setaf 1)
+tgreen=$(tput setaf 2)
+tyellow=$(tput setaf 3)
+treset=$(tput sgr0)
+
+function log() {
+    local level=${1}
+    local _msg=""
+    if [ $# -gt 2 ]; then
+        _msg=${2}
+    else
+        _msg=${msg}
+    fi
+
+    if [ "${level}" == "DEBUG" ]; then
+        if ${DEBUG}; then
+            echo "(DEBUG)   ${_msg}"
+        fi
+    elif [ "${level}" == "INFO" ]; then
+        echo "${tgreen}(INFO)${treset}    $_msg"
+    elif [ "${level}" == "WARNING" ]; then
+        echo "${tyellow}(WARNING)${treset} ${_msg}"
+    elif [ "${level}" == "ERROR" ]; then
+        echo "${tred}(ERROR)${treset}   ${_msg}"
+    fi
+}
+
 OS=""
 TEST_MODE="false"
 LN_OPT="-snvi"
@@ -71,7 +100,9 @@ do
     esac
 done
 
-echo "make link .bashrc -> platform specific file"
+msg="make link .bashrc -> platform specific file"
+log INFO
+
 set +e
 case "${OS}" in
     "ubuntu")
@@ -84,16 +115,22 @@ case "${OS}" in
 esac
 set -e
 
-echo "Install dotfiles..."
+msg="Install dotfiles..."
+log INFO
+
 for f in .??*; do
     [ "${f}" = ".git" ] && continue
     [ "${f}" = ".gitignore" ] && continue
     [ "${f}" = ".gitconfig.local.template" ] && continue
     [ "${f}" = ".gitmodules" ] && continue
     [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
-        echo Skipping .tmux.conf, tmux is not installed. && continue
+        msg="Skipping .tmux.conf, tmux is not installed." &&\
+        log INFO &&\
+        continue
     [ "${f}" = ".config" ] && ! type "nvim" > /dev/null 2>&1 &&\
-        echo Skipping .config, nvim is not installd. && continue
+        msg="Skipping .config, nvim is not installd." &&\
+        log INFO &&\
+        continue
 
     LN_NAME="${f}"
     if [ "${f}" = ".bashrc" ]; then
@@ -101,13 +138,15 @@ for f in .??*; do
             "ubuntu") LN_NAME=".bash_aliases" ;;
             "centos") ;;
             "mac") ;;
-            *) echo Skipping .bashrc, your platform is not suppoted. &&\
-                continue;;
+            *) msg="Skipping .bashrc, your platform is not suppoted."
+               log WARNING
+               continue;;
         esac
     fi
 
     if ${TEST_MODE}; then
-        echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
+        msg="(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
+        log INFO
     else
         set +e
         ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}
@@ -117,18 +156,22 @@ done
 
 if [ ! -e ~/.config ]; then
     if ${TEST_MODE}; then
-        echo "(test mode) mkdir ~/.config"
+        msg="(test mode) mkdir ~/.config"
+        log INFO
     else
-        echo "mkdir ~/.config"
+        msg="mkdir ~/.config"
+        log INFO
         mkdir ~/.config
     fi
 fi
 if ${TEST_MODE}; then
-    echo "(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
+    msg="(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
+    log INFO
 else
     set +e
     ln ${LN_OPT} ${SCR_DIR}/.vim ~/.config/nvim
     set -e
 fi
 
-echo "Completed!"
+msg="Completed!"
+log INFO
