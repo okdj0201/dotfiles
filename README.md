@@ -13,5 +13,5 @@ NOT anything about other files.
 
     $ git clone git@github.com:joxyuki/dotfile.git
 
-Execute install.bat with administrator privillege.
+Execute install.bat with administrator privilege.
 

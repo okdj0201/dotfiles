@@ -27,6 +27,7 @@ set backspace=2
 "set foldmethod=indent
 
 set showmatch           " hilight when "(" and ")" is input
+set spelllang=en,cjk
 set scrolloff=5
 
 set splitright
@@ -62,21 +63,33 @@ nnoremap <C-c><C-c> :<C-u>nohlsearch<CR><Esc>
 nnoremap qq: <Esc>q:
 nnoremap qq/ <Esc>q/
 
+nnoremap x "_x
+vnoremap x "_x
+nnoremap X "_X
+vnoremap X "_X
+nnoremap s "_s
+vnoremap s "_s
+nnoremap S "_S
+vnoremap S "_S
+
 nnoremap ;; 5j
 nnoremap :: :!
 nnoremap zi zizz
 
-nnoremap g// I//<ESC>
-nnoremap g/* O/*<ESC>
-nnoremap g*/ o*/<ESC>
-nnoremap g3 I#<ESC>
-nnoremap g5 I%<ESC>
-nnoremap g2 I"<ESC>
+nnoremap g// I// <ESC>
+nnoremap g/* O/* <ESC>
+nnoremap g*/ o */<ESC>
+nnoremap g3 I# <ESC>
+nnoremap g5 I% <ESC>
+nnoremap g2 I" <ESC>
 
 nnoremap Q <Nop>
 nnoremap q: <Nop>
 nnoremap q/ <Nop>
 nnoremap q? <Nop>
+
+cnoremap sp set spell<CR>
+cnoremap nsp set nospell<CR>
 
 " only for neovim
 if has('nvim')
