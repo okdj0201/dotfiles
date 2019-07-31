@@ -88,8 +88,8 @@ nnoremap q: <Nop>
 nnoremap q/ <Nop>
 nnoremap q? <Nop>
 
-cnoremap sp set spell<CR>
-cnoremap nsp set nospell<CR>
+cnoremap spell set spell<CR>
+cnoremap nospell set nospell<CR>
 
 " only for neovim
 if has('nvim')
