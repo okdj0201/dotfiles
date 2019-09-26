@@ -63,15 +63,6 @@ nnoremap <C-c><C-c> :<C-u>nohlsearch<CR><Esc>
 nnoremap qq: <Esc>q:
 nnoremap qq/ <Esc>q/
 
-nnoremap x "_x
-vnoremap x "_x
-nnoremap X "_X
-vnoremap X "_X
-nnoremap s "_s
-vnoremap s "_s
-nnoremap S "_S
-vnoremap S "_S
-
 nnoremap ;; 5j
 nnoremap :: :!
 nnoremap zi zizz
@@ -87,9 +78,6 @@ nnoremap Q <Nop>
 nnoremap q: <Nop>
 nnoremap q/ <Nop>
 nnoremap q? <Nop>
-
-cnoremap spell set spell<CR>
-cnoremap nospell set nospell<CR>
 
 " only for neovim
 if has('nvim')
