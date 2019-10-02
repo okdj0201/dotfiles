@@ -12,6 +12,7 @@
 	co = checkout
 	st = status
 	d = diff
+	dc = diff --cached
 	d1 = diff HEAD~
 	d2 = diff HEAD~2
 	br = branch
