@@ -17,6 +17,7 @@ then
     alias os='openstack'
     alias vnf='openstack vnf'
     alias vnfd='openstack vnf descriptor'
+    alias vnfp='openstack vnf package'
     alias os-env='echo "Project: ${OS_PROJECT_NAME}, User: ${OS_USERNAME}"'
 fi
 
