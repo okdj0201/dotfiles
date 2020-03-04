@@ -1,23 +1,20 @@
-rem This bat file link or copy only .vimrc to INS_DIR\_vimrc and do
-rem NOT anything about other dotfiles.
-
 rem @echo off
 
-rem directories. change as yours.
-set INS_DIR=%HOMEPATH%
-set DOT_DIR=%HOMEPATH%\git\dotfiles
+rem Related directories. Change as yours.
+set DOT_DIR=%USERPROFILE%\repos\dotfiles
 
-rem make symbliclink. need administrator privilege.
-rem If you does not have the priviliege, copy the file as described
-rem below.
-if exist %HOMEPATH%\_vimrc (
-    del %HOMEPATH%\_vimrc
-    del %HOMEPATH%\.vimrc
+rem create symbliclinks. Need administrator privilege.
+if exist %USERPROFILE%\.gitconfig (
+    del %USERPROFILE%\.gitconfig
 )
-mklink %HOMEPATH%\_vimrc %DOT_DIR%\.vimrc
+mklink %USERPROFILE%\.gitconfig %DOT_DIR%\.gitconfig
+
+if exist %USERPROFILE%\.vimrc (
+    del %USERPROFILE%\.vimrc
+)
 mklink %HOMEPATH%\.vimrc %DOT_DIR%\.vimrc
 
-rem If you want to copy the file instead of symbliclink, enable
-rem following line.
-rem copy /Y %DOT_DIR%\.vimrc %HOMEPATH%\_vimrc
-
+if exist %USERPROFILE%\AppData\Local\nvim (
+    del %USERPROFILE%\AppData\Local\nvim
+)
+mklink /D %USERPROFILE%\AppData\Local\nvim %DOT_DIR%\.vim
