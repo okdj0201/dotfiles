@@ -92,22 +92,25 @@ endif
 "----------
 " dein.vim
 "----------
-if ! has('win32') && ! has('win64') && (has('nvim') || v:version >= 800)
-    if &compatible
-        set nocompatible               " Be iMproved
+if has('nvim') || v:version >= 800
+    if has('win32') || has('win64')
+        let s:dein_dir = '~/AppData/Local/dein'
+        let s:toml_dir = '~/AppData/Local/nvim/dein/'
+    else
+        let s:dein_dir = '~/.cache/dein'
+        let s:toml_dir = '~/.config/nvim/dein/'
     endif
 
     " Required:
-    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+    let &runtimepath = &runtimepath .. ',' .. s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
     " Required:
-    if dein#load_state('~/.cache/dein')
-        call dein#begin('~/.cache/dein')
+    if dein#load_state(s:dein_dir)
+        call dein#begin(s:dein_dir)
 
-        let s:toml_dir = '~/.config/nvim/dein/'
-        call dein#load_toml(s:toml_dir . 'dein.toml')
+        call dein#load_toml(s:toml_dir .. 'dein.toml')
         if has('nvim')
-            call dein#load_toml(s:toml_dir . 'dein_nvim.toml')
+            call dein#load_toml(s:toml_dir .. 'dein_nvim.toml')
         endif
 
         " Required:
@@ -115,15 +118,15 @@ if ! has('win32') && ! has('win64') && (has('nvim') || v:version >= 800)
         call dein#save_state()
     endif
 
-    " Required:
-    filetype plugin indent on
-    syntax enable
-    colorscheme molokai
-
     " If you want to install not installed plugins on startup.
     if dein#check_install()
         call dein#install()
     endif
+
+    " Required:
+    filetype plugin indent on
+    syntax enable
+    colorscheme molokai
 endif
 
 "-----------

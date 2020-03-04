@@ -127,10 +127,6 @@ for f in .??*; do
         msg="Skipping .tmux.conf, tmux is not installed." &&\
         log INFO &&\
         continue
-    [ "${f}" = ".config" ] && ! type "nvim" > /dev/null 2>&1 &&\
-        msg="Skipping .config, nvim is not installd." &&\
-        log INFO &&\
-        continue
 
     LN_NAME="${f}"
     if [ "${f}" = ".bashrc" ]; then
@@ -154,23 +150,26 @@ for f in .??*; do
     fi
 done
 
-if [ ! -e ~/.config ]; then
+if [ type "nvim" ]; then
+    if [ ! -e ~/.config ]; then
+        if ${TEST_MODE}; then
+            msg="(test mode) mkdir ~/.config"
+            log INFO
+        else
+            msg="mkdir ~/.config"
+            log INFO
+            mkdir ~/.config
+        fi
+    fi
+
     if ${TEST_MODE}; then
-        msg="(test mode) mkdir ~/.config"
+        msg="(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
         log INFO
     else
-        msg="mkdir ~/.config"
-        log INFO
-        mkdir ~/.config
+        set +e
+        ln ${LN_OPT} ${SCR_DIR}/.vim ~/.config/nvim
+        set -e
     fi
-fi
-if ${TEST_MODE}; then
-    msg="(test mode) ln ${LN_OPT} ${SCR_DIR}/${f} ~/${LN_NAME}"
-    log INFO
-else
-    set +e
-    ln ${LN_OPT} ${SCR_DIR}/.vim ~/.config/nvim
-    set -e
 fi
 
 msg="Completed!"

@@ -12,7 +12,12 @@ mklink %DOT_DIR%\.vim\init.vim %DOT_DIR%\.vimrc
 if exist %USERPROFILE%\.vimrc (
     del %USERPROFILE%\.vimrc
 )
-mklink %HOMEPATH%\.vimrc %DOT_DIR%\.vimrc
+mklink %USERPROFILE%\.vimrc %DOT_DIR%\.vimrc
+
+if exist %USERPROFILE%\.vim (
+    rmdir %USERPROFILE%\.vim
+)
+mklink /D %USERPROFILE%\.vim %DOT_DIR%\.vim
 
 if exist %USERPROFILE%\AppData\Local\nvim (
     rmdir %USERPROFILE%\AppData\Local\nvim
