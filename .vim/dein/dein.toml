@@ -2,15 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-
-[[plugins]]
-repo = 'nanotech/jellybeans.vim'
-
-[[plugins]]
 repo = 'tomasr/molokai'
 
 [[plugins]]

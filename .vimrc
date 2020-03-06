@@ -33,7 +33,7 @@ set scrolloff=5
 set splitright
 
 " file type indent settings
-augroup fileTypeIndent
+augroup fileTypeIndentAug
     autocmd!
     autocmd BufNewFile,BufRead *.{yml,yaml} setlocal ts=2 sw=2 sts=2
 augroup END
@@ -49,7 +49,10 @@ set wrapscan
 set hlsearch
 
 " vimgrep
-autocmd QuickFixCmdPost *grep* cwindow
+augroup vimgrepAug
+    autocmd!
+    autocmd QuickFixCmdPost *grep* cwindow
+augroup END
 
 " diff setting
 set diffopt=filler,vertical
@@ -82,11 +85,16 @@ nnoremap q? <Nop>
 " only for neovim
 if has('nvim')
     tnoremap <silent> <ESC> <C-\><C-n>  " terminal emulator
-    let g:python3_host_prog = system('echo -n `which python3`')
+    if has('win32') || has('win64')
+        let g:python3_host_prog =
+            \'~\AppData\Local\Programs\Python\Python38-32\python.exe'
+    else
+        let g:python3_host_prog = system('echo -n `which python3`')
+    endif
 endif
 
 "---------------------
-"-  plugin settings  -
+"   plugin settings   
 "---------------------
 
 "----------
@@ -102,7 +110,8 @@ if has('nvim') || v:version >= 800
     endif
 
     " Required:
-    let &runtimepath = &runtimepath .. ',' .. s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
+    let &runtimepath = &runtimepath .. ',' .. s:dein_dir
+                     \ .. '/repos/github.com/Shougo/dein.vim'
 
     " Required:
     if dein#load_state(s:dein_dir)
@@ -129,26 +138,55 @@ if has('nvim') || v:version >= 800
     colorscheme molokai
 endif
 
-"-----------
-" unite.vim
-"-----------
-let g:unite_enable_start_insert=0
-let g:unite_source_histroy_yank_enable=1
-let g:unite_source_file_mru_limit=50
+"-------------
+" denite.nvim
+"-------------
+augroup deniteAug
+    autocmd!
+    autocmd FileType denite call s:denite_my_settings()
+    function! s:denite_my_settings() abort
+        set winblend=30
+        nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+        nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+        nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+        nnoremap <silent><buffer><expr> q denite#do_map('quit')
+        nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+        nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+    endfunction
 
-call unite#custom#source('file', 'matchers', "matcher_default")
+    autocmd FileType denite-filter call s:denite_filter_my_settings()
+    function! s:denite_filter_my_settings() abort
+        set winblend=10
+        imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+    endfunction
+augroup END
 
-nnoremap [unite] <Nop>
-nmap <Space>u [unite]
+if has('win32') || has('win64')
+    " Change file/rec command.
+    call denite#custom#var('file/rec', 'command', ['scantree.py', '--ignore',
+                         \ '.git', '--path', ':directory'])
+else
+    call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor',
+                         \ '--nogroup', '-g', ''])
+endif
 
-nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
-"nnoremap <silent> [unite]t :<C-u>Unite buffer_tab<CR>
-nnoremap <silent> [unite]f :<C-u>Unite file<CR>
-nnoremap <silent> [unite]r :<C-u>Unite file_rec<CR>
-nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]o :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]l :<C-u>Unite line<CR>
-"nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
+let s:denite_win_width_percent = 0.85
+let s:denite_win_height_percent = 0.7
+call denite#custom#option('default', {
+    \ 'split': 'floating',
+    \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
+    \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
+    \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
+    \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
+    \ 'prompt': '> ', })
+
+nnoremap [Denite] <Nop>
+nmap <Space>d [Denite]
+nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
+nnoremap <silent> [Denite]f :<C-u>Denite file/rec<CR>
+nnoremap <silent> [Denite]m :<C-u>Denite file_mru<CR>
+nnoremap <silent> [Denite]l :<C-u>Denite line<CR>
+nnoremap <silent> [Denite]g :<C-u>Denite grep<CR>
 
 "----------
 " deoplete
@@ -170,7 +208,8 @@ if ! has('win32') && ! has('win64')
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
     let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = "--ignore E128,N320,I100,I201,D100,D101,D102,D103"
+    let g:syntastic_python_flake8_args =
+      \ "--ignore E128,N320,I100,I201,D100,D101,D102,D103"
 endif
 
 "-----------
@@ -192,22 +231,22 @@ let g:lightline = {
 "----------
 nnoremap [fugitive] <Nop>
 nmap <Space>g [fugitive]
-nnoremap [fugitive]s :Gstatus<CR><C-w>T:help fugitive_c<CR><C-w><C-w>
-nnoremap [fugitive]a :Gwrite<CR>
-nnoremap [fugitive]w :Gwq<CR>
-nnoremap [fugitive]c :Gcommit<CR>
-nnoremap [fugitive]m :Gcommit --amend<CR>
-nnoremap [fugitive]d :Gdiff<CR>
-nnoremap [fugitive]b :Gblame<CR>
-nnoremap [fugitive]r :Gread<CR>
-nnoremap [fugitive]g :Ggrep
+nnoremap [fugitive]s :<C-u>Gstatus<CR><C-w>T:help fugitive_c<CR><C-w><C-w>
+nnoremap [fugitive]a :<C-u>Gwrite<CR>
+nnoremap [fugitive]w :<C-u>Gwq<CR>
+nnoremap [fugitive]c :<C-u>Gcommit<CR>
+nnoremap [fugitive]m :<C-u>Gcommit --amend<CR>
+nnoremap [fugitive]d :<C-u>Gdiff<CR>
+nnoremap [fugitive]b :<C-u>Gblame<CR>
+nnoremap [fugitive]r :<C-u>Gread<CR>
+nnoremap [fugitive]g :<C-u>Ggrep
 
 "--------
 " previm
 "--------
 if has('mac')
     let g:previm_open_cmd='open /Applications/Google\ Chrome.app/'
-    augroup PrevimSettings
+    augroup PrevimAug
         autocmd!
         autocmd BufNewFile,BufRead *.{md,markdown} set filetype=markdown
     augroup END
