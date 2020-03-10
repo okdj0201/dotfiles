@@ -9,7 +9,7 @@ Usage:
 
 Options:
     -t  test mode. just output commands but do not make links
-    -f  remove existing files (default is interctive)
+    -f  force overwrite existing files (default is interctive)
     -h  show this message
 EOT
 
@@ -100,7 +100,7 @@ do
     esac
 done
 
-msg="make link .bashrc -> platform specific file"
+msg="Create link .bashrc -> ${SCR_DIR}/.bashrc.<OS>"
 log INFO
 
 set +e
@@ -124,7 +124,7 @@ for f in .??*; do
     [ "${f}" = ".gitconfig.local.template" ] && continue
     [ "${f}" = ".gitmodules" ] && continue
     [ "${f}" = ".tmux.conf" ] && ! type "tmux" > /dev/null 2>&1 &&\
-        msg="Skipping .tmux.conf, tmux is not installed." &&\
+        msg="Skip .tmux.conf, tmux is not installed." &&\
         log INFO &&\
         continue
 
@@ -134,7 +134,7 @@ for f in .??*; do
             "ubuntu") LN_NAME=".bash_aliases" ;;
             "centos") ;;
             "mac") ;;
-            *) msg="Skipping .bashrc, your platform is not suppoted."
+            *) msg="Skipp .bashrc, your platform is not suppoted."
                log WARNING
                continue;;
         esac
@@ -150,7 +150,9 @@ for f in .??*; do
     fi
 done
 
-if [ type "nvim" ]; then
+if type "nvim"; then
+    msg="Install Neovim settings..."
+    log INFO
     if [ ! -e ~/.config ]; then
         if ${TEST_MODE}; then
             msg="(test mode) mkdir ~/.config"
@@ -168,8 +170,26 @@ if [ type "nvim" ]; then
     else
         set +e
         ln ${LN_OPT} ${SCR_DIR}/.vim ~/.config/nvim
+        ln ${LN_OPT} ${SCR_DIR}/.vimrc ${SCR_DIR}/.vim/init.vim
         set -e
     fi
+
+    msg="Install dein.vim..."
+    log INFO
+    if ${TEST_MODE}; then
+        msg="(test mode) install dein.vim"
+        log INFO
+    else
+        set +e
+        curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > dein_installer.sh
+        chmod +x dein_installer.sh
+        /bin/bash dein_installer.sh ~/.cache/dein> /dev/null 2>&1
+        rm dein_installer.sh
+        set -e
+    fi
+else
+    msg="Neovim is not installed. Skip Neovim related settings."
+    log INFO
 fi
 
 msg="Completed!"

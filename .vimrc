@@ -110,16 +110,16 @@ if has('nvim') || v:version >= 800
     endif
 
     " Required:
-    let &runtimepath = &runtimepath .. ',' .. s:dein_dir
-                     \ .. '/repos/github.com/Shougo/dein.vim'
+    let &runtimepath = &runtimepath . ',' . s:dein_dir
+                     \ . '/repos/github.com/Shougo/dein.vim'
 
     " Required:
     if dein#load_state(s:dein_dir)
         call dein#begin(s:dein_dir)
 
-        call dein#load_toml(s:toml_dir .. 'dein.toml')
+        call dein#load_toml(s:toml_dir . 'dein.toml')
         if has('nvim')
-            call dein#load_toml(s:toml_dir .. 'dein_nvim.toml')
+            call dein#load_toml(s:toml_dir . 'dein_nvim.toml')
         endif
 
         " Required:
@@ -145,7 +145,9 @@ augroup deniteAug
     autocmd!
     autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort
-        set winblend=30
+        if has('nvim-0.4.0')
+            set winblend=30
+        endif
         nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
         nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
         nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
@@ -156,7 +158,9 @@ augroup deniteAug
 
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        set winblend=10
+        if has('nvim-0.4.0')
+            set winblend=10
+        endif
         imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
     endfunction
 augroup END
@@ -167,18 +171,20 @@ if has('win32') || has('win64')
                          \ '.git', '--path', ':directory'])
 else
     call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor',
-                         \ '--nogroup', '-g', ''])
+                         \ '--nogroup', '--hidden', '--ignore', '.git', '-g', ''])
 endif
 
-let s:denite_win_width_percent = 0.85
-let s:denite_win_height_percent = 0.7
-call denite#custom#option('default', {
-    \ 'split': 'floating',
-    \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
-    \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
-    \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
-    \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
-    \ 'prompt': '> ', })
+if has('nvim-0.4.0')
+    let s:denite_win_width_percent = 0.85
+    let s:denite_win_height_percent = 0.7
+    call denite#custom#option('default', {
+        \ 'split': 'floating',
+        \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
+        \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
+        \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
+        \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
+        \ 'prompt': '> ', })
+endif
 
 nnoremap [Denite] <Nop>
 nmap <Space>d [Denite]
