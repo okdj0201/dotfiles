@@ -136,6 +136,11 @@ if has('nvim') || v:version >= 800
     filetype plugin indent on
     syntax enable
     colorscheme molokai
+    highlight Normal ctermbg=NONE guibg=NONE
+    highlight NonText ctermbg=NONE guibg=NONE
+    highlight LineNr ctermbg=NONE guibg=NONE
+    highlight Folded ctermbg=NONE guibg=NONE
+    highlight EndOfBuffer ctermbg=NONE guibg=NONE
 endif
 
 "-------------
