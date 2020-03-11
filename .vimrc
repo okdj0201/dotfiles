@@ -1,9 +1,6 @@
 " editing and saveing settings
 set autowrite
 set nobackup
-if has('win32') || has('win64')
-    set undodir=$HOME/.vim/undo  " undo file directory (kaoriya only)
-endif
 set clipboard+=unnamed
 set hidden              " enable buffer
 set switchbuf+=useopen
