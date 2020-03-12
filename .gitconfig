@@ -18,7 +18,5 @@
 	br = branch
 [gitreview]
 	username = joxyuki
-[url "https://"]
-	insteadOf = git://
 [push]
 	default = simple
