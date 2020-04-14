@@ -177,12 +177,12 @@ else
 endif
 
 if has('nvim-0.4.0')
-    let s:denite_win_width_percent = 0.85
+    let s:denite_win_width_percent = 0.7
     let s:denite_win_height_percent = 0.7
     call denite#custom#option('default', {
         \ 'split': 'floating',
         \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
-        \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
+        \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 1.2),
         \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
         \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
         \ 'prompt': '> ', })
