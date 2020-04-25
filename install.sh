@@ -8,12 +8,10 @@ Usage:
     $0 [OPTIONS]
 
 Options:
-    -t  test mode. just output commands but do not make links
-    -f  force overwrite existing files (default is interctive)
-    -h  show this message
+    -t  Test mode. Just output commands but do not make links.
+    -f  Force overwrite existing files (default is interctive).
+    -h  Show this help message.
 EOT
-
-    exit 1
 }
 
 function get_os() {
@@ -95,8 +93,8 @@ do
     case ${OPT} in
         t) TEST_MODE=true ;;
         f) LN_OPT=${LN_OPT/i/}; LN_OPT+='f' ;;
-        h) usage ;;
-        \?) usage ;;
+        h) usage; exit 0 ;;
+        \?) usage; exit 1 ;;
     esac
 done
 
