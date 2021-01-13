@@ -9,13 +9,14 @@
 	ff = only
 [alias]
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
-	co = checkout
 	st = status
+	br = branch
+	co = checkout
 	d = diff
 	dc = diff --cached
 	d1 = diff HEAD~
 	d2 = diff HEAD~2
-	br = branch
+	dt = difftool -x 'vim -d'
 [gitreview]
 	username = joxyuki
 [push]

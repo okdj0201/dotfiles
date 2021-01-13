@@ -143,40 +143,36 @@ endif
 "-------------
 " denite.nvim
 "-------------
-augroup deniteAug
-    autocmd!
-    autocmd FileType denite call s:denite_my_settings()
-    function! s:denite_my_settings() abort
-        if has('nvim-0.4.0')
+if (has('nvim-0.4.0') || v:version >= 800) && has('python3')
+    augroup deniteAug
+        autocmd!
+        autocmd FileType denite call s:denite_my_settings()
+        function! s:denite_my_settings() abort
             set winblend=30
-        endif
-        nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-        nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-        nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-        nnoremap <silent><buffer><expr> q denite#do_map('quit')
-        nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-        nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-    endfunction
+            nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+            nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+            nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+            nnoremap <silent><buffer><expr> q denite#do_map('quit')
+            nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+            nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+        endfunction
 
-    autocmd FileType denite-filter call s:denite_filter_my_settings()
-    function! s:denite_filter_my_settings() abort
-        if has('nvim-0.4.0')
+        autocmd FileType denite-filter call s:denite_filter_my_settings()
+        function! s:denite_filter_my_settings() abort
             set winblend=10
-        endif
-        imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-    endfunction
-augroup END
+            imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+        endfunction
+    augroup END
 
-if has('win32') || has('win64')
-    " Change file/rec command.
-    call denite#custom#var('file/rec', 'command', ['scantree.py', '--ignore',
-                         \ '.git', '--path', ':directory'])
-else
-    call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor',
-                         \ '--nogroup', '--hidden', '--ignore', '.git', '-g', ''])
-endif
+    if has('win32') || has('win64')
+        " Change file/rec command.
+        call denite#custom#var('file/rec', 'command', ['scantree.py', '--ignore',
+                             \ '.git', '--path', ':directory'])
+    else
+        call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor',
+                             \ '--nogroup', '--hidden', '--ignore', '.git', '-g', ''])
+    endif
 
-if has('nvim-0.4.0')
     let s:denite_win_width_percent = 0.7
     let s:denite_win_height_percent = 0.7
     call denite#custom#option('default', {
@@ -186,15 +182,15 @@ if has('nvim-0.4.0')
         \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
         \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
         \ 'prompt': '> ', })
-endif
 
-nnoremap [Denite] <Nop>
-nmap <Space>d [Denite]
-nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
-nnoremap <silent> [Denite]f :<C-u>Denite file/rec<CR>
-nnoremap <silent> [Denite]m :<C-u>Denite file_mru<CR>
-nnoremap <silent> [Denite]l :<C-u>Denite line<CR>
-nnoremap <silent> [Denite]g :<C-u>Denite grep<CR>
+    nnoremap [Denite] <Nop>
+    nmap <Space>d [Denite]
+    nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
+    nnoremap <silent> [Denite]f :<C-u>Denite file/rec<CR>
+    nnoremap <silent> [Denite]m :<C-u>Denite file_mru<CR>
+    nnoremap <silent> [Denite]l :<C-u>Denite line<CR>
+    nnoremap <silent> [Denite]g :<C-u>Denite grep<CR>
+endif
 
 "----------
 " deoplete
