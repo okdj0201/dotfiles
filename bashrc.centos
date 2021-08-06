@@ -22,6 +22,10 @@ then
     alias ap='ansible-playbook'
 fi
 
+alias rmi='rm -i'
+alias rmf='rm -fr'
+alias vib='vim ~/.bahrc'
+
 if type "openstack" > /dev/null 2>&1
 then
     alias os='openstack'
@@ -34,3 +38,4 @@ if type "nvim" > /dev/null 2>&1
 then
     alias vim='nvim'
 fi
+alias path='echo /root/.cargo/bin:/root/.pyenv/shims:/root/.pyenv/bin:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin'

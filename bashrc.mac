@@ -30,3 +30,7 @@ PS1='\[\e[36m\u@\h\e[0m:\w\n$ '
 alias ls='ls -FG'
 alias ll='ls -alFG'
 
+alias rmi='rm -i'
+alias rmf='rm -fr'
+alias viz='vim ~/.zshrc'
+alias path='echo /root/.cargo/bin:/root/.pyenv/shims:/root/.pyenv/bin:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin'

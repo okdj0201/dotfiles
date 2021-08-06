@@ -27,3 +27,4 @@ if type "nvim" > /dev/null 2>&1
 then
     alias vim='nvim'
 fi
+alias path='echo /root/.cargo/bin:/root/.pyenv/shims:/root/.pyenv/bin:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin'
