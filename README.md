@@ -11,7 +11,7 @@ dotfiles such as .vimrc, .bash_profile etc.
 This bat file link or copy only .vimrc to INS_DIR\_vimrc and do
 NOT anything about other files.
 
-    $ git clone git@github.com:joxyuki/dotfile.git
+    $ git clone git@github.com:okdj0201/dotfile.git
 
 Execute install.bat with administrator privilege.
 
