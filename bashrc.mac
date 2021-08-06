@@ -26,3 +26,7 @@ if type "nvim" > /dev/null 2>&1
 then
     alias vim='nvim'
 fi
+PS1='\[\e[36m\u@\h\e[0m:\w\n$ '
+alias ls='ls -FG'
+alias ll='ls -alFG'
+

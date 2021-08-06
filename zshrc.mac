@@ -1,0 +1,12 @@
+alias ls='ls -lG'
+alias ll='ls -laG'
+alias k-jump='ssh k-jump'
+alias t-jump='ssh t-jump'
+alias dev='ssh dev'
+
+setopt nonomatch
+
+export LANG="ja_JP.UTF-8"
+
+PROMPT='%F{blue}%n@%m%f:%F{white}%~%f
+$ '
