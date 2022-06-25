@@ -3,7 +3,7 @@ dotfiles such as .vimrc, .bash_profile etc.
 
 # Install
 ## Linux, Mac OS X
-    $ git clone git@github.com:joxyuki/dotfile.git
+    $ git clone git@github.com:okdj0201/dotfile.git
     $ chmod +x install.sh
     $ ./install.sh
 
